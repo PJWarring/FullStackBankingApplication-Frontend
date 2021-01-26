@@ -1,20 +1,42 @@
-<div class="main">
-    <div class="col-md-6 col-sm-12">
-       <div class="signup-form">
-          <div>
-              <!--TODO: update the data binding so this accuratly creates a user object and then submits it to the database-->
-             <div class="form-group">
-                <label>Username</label>
-                <input [(ngModel)]="user.username" class="form-control" placeholder="Username">
-             </div>
-             <div class="form-group">
-                <label>Password</label>
-                <input [(ngModel)]="user.password" type="password" class="form-control" placeholder="Password">
-             </div>
-             <button class="btn btn-black" (click)="SignupUser()">Signup</button>
-             <button class="btn btn-secondary" [routerLink]="['../login']">Go Back</button>
+<h3 class="text-center">Sign Up</h3>
+<div class="container">
+    <div class="container" style="width: 30%; padding-top: 25px">
+        <div class="form-group row">
+            <label for="inputusername" class="col-md-4 col-form-label">Username</label>
+            <div class="col-md-8">
+                <input id="inputusername" class="form-control" [(ngModel)]="user.username" />
             </div>
-            <div *ngIf="clientMessage">{{clientMessage.message}}</div>
-       </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputpassword" class="col-md-4 col-form-label">Password</label>
+            <div class="col-md-8">
+                <input type="password" id="inputpassword" class="form-control" [(ngModel)]="user.password" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputfirstname" class="col-md-4 col-form-label">First Name</label>
+            <div class="col-md-8">
+                <input id="inputfirstname" class="form-control" [(ngModel)]="user.firstname" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputlastname" class="col-md-4 col-form-label">Last Name</label>
+            <div class="col-md-8">
+                <input id="inputlastname" class="form-control" [(ngModel)]="user.lastname" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputemail" class="col-md-4 col-form-label">Email</label>
+            <div class="col-md-8">
+                <input id="inputemail" class="form-control" [(ngModel)]="user.email" />
+            </div>
+        </div>
+    </div>
+    <div class="container text-center" style="width: 25%; padding-top: 25px">
+        <button class="btn btn-success" type="button" style="margin:auto; width: 50%" (click)="signupUser()">Signup</button>
+    </div>
+    <div *ngIf="clientMessage" class="text-center">{{clientMessage.message}}</div>
+    <div class="container text-center" style="width: 25%; padding-top: 25px">
+        <button class="btn" type="button" style="margin:auto; width: 50%" routerLink="/login">Return to Login</button>
     </div>
 </div>

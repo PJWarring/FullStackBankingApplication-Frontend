@@ -22,14 +22,17 @@ export class LoginComponent implements OnInit {
   public loginUser() : void {
     this.userService.loginUser(this.user)
     .subscribe(data => {
-        if(data.message=="LOGIN SUCCESSFUL") {
+        if(data.id != 0) {
           this.router.navigateByUrl('/home');
-          let activeUser = this.userService.getUserByUsername(this.user);
-          sessionStorage.setItem('activeUsername', this.user.username);
-          //store activeRole here in the session (requires getting this information from active username)
+          // let activeUserObservable = this.userService.getUserById(this.user);
+          // let activeUser:User;
+          // activeUserObservable.subscribe(data => activeUser = data);
+          sessionStorage.setItem('activeId', data.id.toString());
+          sessionStorage.setItem('activeUsername', data.username);
+          sessionStorage.setItem('activeRole', data.role);
         } else {
           this.router.navigateByUrl('/login');
-          this.clientMessage = new ClientMessage(data.message)
+          this.clientMessage = new ClientMessage("Login Was Unsuccessful")
         }
       })
   }

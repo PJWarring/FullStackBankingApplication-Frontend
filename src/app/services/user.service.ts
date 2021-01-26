@@ -15,28 +15,43 @@ export class UserService {
 
   constructor(private http:HttpClient) { }
   
-  loginUser(user:User):Observable<ClientMessage> {
-    return this.http.post<ClientMessage>(`${SERVER_URL}/login`, user).pipe(
-      catchError(this.handleError<ClientMessage>('loginUser', null))
+  loginUser(user:User):Observable<User> {
+    return this.http.post<User>(`${SERVER_URL}/login`, user).pipe(
+      catchError(this.handleError<User>('loginUser', null)));
+  }
+
+  logoutUser():void {
+    sessionStorage.clear();
+  }
+
+  registerUser(user: User): Observable<any> {
+    return this.http.post<User>(`${SERVER_URL}/user/create`, user).pipe(
+      catchError(this.handleError<any>('createUser', null))
+    );
+  }
+
+  isValidUser(user:User):Observable<ClientMessage> {
+    return this.http.post<User>(`${SERVER_URL}/user/verify`, user).pipe(
+      catchError(this.handleError<any>('isValidUser', null))
     )
   }
 
-  registerUser(user: User): Observable<ClientMessage> {
-    return this.http.post<ClientMessage>(`${SERVER_URL}/register`, user).pipe(
-      catchError(this.handleError<ClientMessage>('registerUser', null))
-    )
+  updateUser(user: User): Observable<ClientMessage> {
+    return this.http.put<ClientMessage>(`${SERVER_URL}/user/update/${user.id}`, user).pipe(
+      catchError(this.handleError<ClientMessage>('updateUser', null))
+    );
   }
 
-  getUserByUsername(user: User): Observable<User> {
-    return this.currUser = this.http.post<User>(`${SERVER_URL}/getUserByName`, user).pipe(
-      catchError(this.handleError<User>('getUserByUsername', null))
-    )
+  getUserById(user: User): Observable<User> {
+    return this.currUser = this.http.post<User>(`${SERVER_URL}/view/${user.id}`, user).pipe(
+      catchError(this.handleError<User>('getUserById', null))
+    );
   }
 
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${SERVER_URL}/getUsers`).pipe(
-      catchError(this.handleError<User[]>('getUserByUsername', null))
-    )
+    return this.http.get<User[]>(`${SERVER_URL}/view/all`).pipe(
+      catchError(this.handleError<User[]>('getAllUsers', null))
+    );
   } 
 
   private handleError<T>(operation = 'operation', result?: T) {

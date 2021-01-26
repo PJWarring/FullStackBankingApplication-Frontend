@@ -5,8 +5,9 @@ export class User {
     firstname:string;
     lastname:string;
     email:string;
+    role:string;
 
-    constructor(id?:number, username?:string, password?:string, firstname?:string, lastname?:string, email?:string) {
+    constructor(id?:number, username?:string, password?:string, firstname?:string, lastname?:string, email?:string, role?:string) {
         if (id) {
             this.id = id;
         } else {
@@ -36,6 +37,11 @@ export class User {
             this.email = email;
         } else {
             this.email = "";
+        }
+        if (role) {
+            this.role = role;
+        } else {
+            this.role = "USER";
         }
     }
 }
