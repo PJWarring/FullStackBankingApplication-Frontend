@@ -1,2 +1,22 @@
 <app-nav></app-nav>
-<p>home works!</p>
+<h1>Welcome {{activeUsername}} to Full Stack Banking</h1>
+<div *ngIf="condition">
+    <p>You do not have any accounts.</p>
+</div>
+<div *ngIf="condition2">
+    <p>There are no accounts to view.</p>
+</div>
+<div class="grid grid-pad">
+    <a *ngFor="let account of setAccounts" class="col-1-4"
+    routerLink="../accounts/{{account.id}}">
+        <div class="module account">
+            <h4>{{account.id}}</h4>
+            <h4>Balance: {{account.Balance}}</h4>
+            <h4>Account Type: {{account.Type}}</h4>
+            <h4>Account Status: {{account.Status}}</h4>
+            <button>Deposit</button>
+            <button>Withdraw</button>
+            <button>Transfer</button>
+        </div>
+    </a>
+</div>
