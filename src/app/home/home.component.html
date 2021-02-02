@@ -1,22 +1,18 @@
 <app-nav></app-nav>
 <h1>Welcome {{activeUsername}} to Full Stack Banking</h1>
 <div *ngIf="condition">
-    <p>You do not have any accounts.</p>
-</div>
-<div *ngIf="condition2">
     <p>There are no accounts to view.</p>
 </div>
 <div class="grid grid-pad">
-    <a *ngFor="let account of setAccounts" class="col-1-4"
-    routerLink="../accounts/{{account.id}}">
+    <div *ngFor="let account of accounts" class="col-1-4">
         <div class="module account">
-            <h4>{{account.id}}</h4>
-            <h4>Balance: {{account.Balance}}</h4>
-            <h4>Account Type: {{account.Type}}</h4>
-            <h4>Account Status: {{account.Status}}</h4>
+            <p>{{account.id}}</p>
+            <p>Balance: {{account.balance | currency:'USD'}}</p>
+            <p>Account Type: {{account.type | titlecase}}</p>
+            <p>Account Status: {{account.status | titlecase}}</p>
             <button>Deposit</button>
             <button>Withdraw</button>
             <button>Transfer</button>
         </div>
-    </a>
+    </div>
 </div>

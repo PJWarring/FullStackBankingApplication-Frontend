@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { SERVER_URL } from 'src/environments/environment';
 import { User } from '../models/user.model';
 
 @Injectable({
@@ -7,11 +10,20 @@ import { User } from '../models/user.model';
 })
 export class AccountService {
 
+  public currAccount:Observable<Account[]>;
+
   constructor(public http:HttpClient) { }
 
-  public getUserAccounts(user:User):void {
-    //TODO: complete this method and change the return condition to reflect the fact
-    //that this should return a list of all accounts visible to the user (the accounts the user
-    //owns, or if they are a manager/admin then all accounts)
+  public getUserAccounts(user:User):Observable<Account[]> {
+    return this.currAccount = this.http.get<Account[]>(`${SERVER_URL}/account/view/user/${user.id}`).pipe(
+      catchError(this.handleError<Account[]>('getAccountByUser', null))
+    );
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error:any):Observable<T> => {
+      console.error(error);
+      return of(result as T);
+    }
   }
 }

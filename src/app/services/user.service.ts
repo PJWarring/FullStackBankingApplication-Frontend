@@ -2,7 +2,7 @@ import { SERVER_URL } from './../../environments/environment';
 import { ClientMessage } from './../models/client-message.model';
 import { User } from './../models/user.model';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable,of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -43,13 +43,13 @@ export class UserService {
   }
 
   getUserById(user: User): Observable<User> {
-    return this.currUser = this.http.post<User>(`${SERVER_URL}/view/${user.id}`, user).pipe(
+    return this.currUser = this.http.get<User>(`${SERVER_URL}/user/view/${user.id}`).pipe(
       catchError(this.handleError<User>('getUserById', null))
     );
   }
 
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${SERVER_URL}/view/all`).pipe(
+    return this.http.get<User[]>(`${SERVER_URL}/user/view/all`).pipe(
       catchError(this.handleError<User[]>('getAllUsers', null))
     );
   } 

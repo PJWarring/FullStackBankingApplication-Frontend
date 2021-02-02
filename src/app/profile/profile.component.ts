@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
   }
 
   public updateUser() {
-    this.userService.updateUser(this.userInfo).subscribe(data => this.clientMessage = data);
+    this.userService.updateUser(this.userInfo).subscribe(data => this.clientMessage = new ClientMessage("User was updated."));
   }
 
 }
