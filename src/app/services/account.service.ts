@@ -1,3 +1,4 @@
+import { Account } from './../models/account.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
@@ -17,6 +18,12 @@ export class AccountService {
   public getUserAccounts(user:User):Observable<Account[]> {
     return this.currAccount = this.http.get<Account[]>(`${SERVER_URL}/account/view/user/${user.id}`).pipe(
       catchError(this.handleError<Account[]>('getAccountByUser', null))
+    );
+  }
+
+  public getAdminAccounts():Observable<Account[]> {
+    return this.currAccount = this.http.get<Account[]>(`${SERVER_URL}/account/view/all`).pipe(
+      catchError(this.handleError<Account[]>('getAllAccounts', null))
     );
   }
 

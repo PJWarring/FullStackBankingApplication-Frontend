@@ -1,6 +1,6 @@
 <app-nav></app-nav>
 <h1>Welcome {{activeUsername}} to Full Stack Banking</h1>
-<div *ngIf="condition">
+<div *ngIf="noAccountCondition">
     <p>There are no accounts to view.</p>
 </div>
 <div class="grid grid-pad">
@@ -10,9 +10,9 @@
             <p>Balance: {{account.balance | currency:'USD'}}</p>
             <p>Account Type: {{account.type | titlecase}}</p>
             <p>Account Status: {{account.status | titlecase}}</p>
-            <button>Deposit</button>
-            <button>Withdraw</button>
-            <button>Transfer</button>
+            <button *ngIf="!isManagerCondition">Deposit</button>
+            <button *ngIf="!isManagerCondition">Withdraw</button>
+            <button *ngIf="!isManagerCondition">Transfer</button>
         </div>
     </div>
 </div>
