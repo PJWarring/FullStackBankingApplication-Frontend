@@ -1,18 +1,26 @@
 <app-nav></app-nav>
-<h1>Welcome {{activeUsername}} to Full Stack Banking</h1>
+<app-search></app-search>
 <div *ngIf="noAccountCondition">
     <p>There are no accounts to view.</p>
 </div>
 <div class="grid grid-pad">
     <div *ngFor="let account of accounts" class="col-1-4">
         <div class="module account">
-            <p>{{account.id}}</p>
+            <p>Account Id: {{account.id}}</p>
             <p>Balance: {{account.balance | currency:'USD'}}</p>
             <p>Account Type: {{account.type | titlecase}}</p>
             <p>Account Status: {{account.status | titlecase}}</p>
-            <button *ngIf="!isManagerCondition">Deposit</button>
-            <button *ngIf="!isManagerCondition">Withdraw</button>
-            <button *ngIf="!isManagerCondition">Transfer</button>
+
+            <div *ngIf="account.status == 'OPEN'">
+                <button *ngIf="!isManagerCondition">Deposit</button>
+                <button *ngIf="!isManagerCondition">Withdraw</button>
+                <button *ngIf="!isManagerCondition">Transfer</button>
+            </div>
+            <div *ngIf="account.status != 'OPEN'">
+                <button *ngIf="!isManagerCondition" disabled>Deposit</button>
+                <button *ngIf="!isManagerCondition" disabled>Withdraw</button>
+                <button *ngIf="!isManagerCondition" disabled>Transfer</button>
+            </div>
         </div>
     </div>
 </div>

@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   accounts:Account[] = [];
   noAccountCondition:boolean = false;
   isManagerCondition:boolean = false;
+  isAdminCondition:boolean = false;
 
   public activeId:number = Number(sessionStorage.getItem('activeId'));
   public activeRole:string = sessionStorage.getItem('activeRole');
@@ -26,6 +27,8 @@ export class HomeComponent implements OnInit {
     if (this.activeRole == "USER") {
       this.getUserAccounts();
     } else {
+      if (this.activeRole == "MANAGER") this.isManagerCondition = true;
+      else if (this.activeRole == "ADMIN") this.isAdminCondition = true;
       this.getAdminAccounts();
     }    
   }
