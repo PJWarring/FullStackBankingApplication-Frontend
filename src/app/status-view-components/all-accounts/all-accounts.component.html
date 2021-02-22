@@ -1,0 +1,25 @@
+<div *ngIf="clientMessage" class="alert alert-primary" role="alert">{{clientMessage.message}}</div>
+<div *ngIf="noAccountCondition">
+    <p>There are no accounts to view.</p>
+</div>
+<div class="grid grid-pad">
+    <div *ngFor="let account of accounts" class="col-1-4">
+        <div class="module account">
+            <p>Account Id: {{account.id}}</p>
+            <p>Balance: {{account.balance | currency:'USD'}}</p>
+            <p>Account Type: {{account.type | titlecase}}</p>
+            <p>Account Status: {{account.status | titlecase}}</p>
+
+            <div *ngIf="account.status == 'OPEN'">
+                <button *ngIf="!isManagerCondition" class="btn toggle-btn" (click)="newDeposit(account.id);">Deposit</button>
+                <button *ngIf="!isManagerCondition" class="btn toggle-btn" (click)="newWithdraw(account.id);">Withdraw</button>
+                <button *ngIf="!isManagerCondition" class="btn toggle-btn" (click)="newTransfer(account.id);">Transfer</button>
+            </div>
+            <div *ngIf="account.status != 'OPEN'">
+                <button *ngIf="!isManagerCondition" class="btn toggle-btn" disabled>Deposit</button>
+                <button *ngIf="!isManagerCondition" class="btn toggle-btn" disabled>Withdraw</button>
+                <button *ngIf="!isManagerCondition" class="btn toggle-btn" disabled>Transfer</button>
+            </div>
+        </div>
+    </div>
+</div>

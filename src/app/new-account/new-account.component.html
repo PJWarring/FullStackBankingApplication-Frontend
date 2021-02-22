@@ -1,0 +1,15 @@
+<div class="newAccountModal">
+    <form name="newAccountForm">
+        <h1>Account Form</h1>
+        <label for="amount">Balance: $</label>
+        <input id="amount" type="number" step="0.01" value="0" name="depositForm" disabled/>
+        <br />
+        <label for="typeSelect">Type:</label>
+        <select name="typeSelect" id="typeSelect" [(ngModel)]="account.type"> <!--the error is being caused by the ngModel binding (if it is removed the dropdown displays properly)-->
+            <option value="checking" selected>Checking</option>
+            <option value="savings">Savings</option>
+        </select>
+        <br/>
+        <input type="submit" class="btn btn-primary" (click)="newAccount()" name="depositForm"/>
+    </form>
+</div>

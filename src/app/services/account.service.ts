@@ -1,3 +1,4 @@
+import { AccountTransaction } from './../models/account-transaction.model';
 import { Account } from './../models/account.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -11,19 +12,38 @@ import { User } from '../models/user.model';
 })
 export class AccountService {
 
-  public currAccount:Observable<Account[]>;
+  public currAccounts:Observable<Account[]>;
+  public currAccount:Observable<Account>;
 
   constructor(public http:HttpClient) { }
 
   public getUserAccounts(user:User):Observable<Account[]> {
-    return this.currAccount = this.http.get<Account[]>(`${SERVER_URL}/account/view/user/${user.id}`).pipe(
+    return this.currAccounts = this.http.get<Account[]>(`${SERVER_URL}/account/view/user/${user.id}`).pipe(
       catchError(this.handleError<Account[]>('getAccountByUser', null))
     );
   }
 
   public getAdminAccounts():Observable<Account[]> {
-    return this.currAccount = this.http.get<Account[]>(`${SERVER_URL}/account/view/all`).pipe(
+    return this.currAccounts = this.http.get<Account[]>(`${SERVER_URL}/account/view/all`).pipe(
       catchError(this.handleError<Account[]>('getAllAccounts', null))
+    );
+  }
+
+  public getAccountById(accountid:number):Observable<Account> {
+    return this.currAccount = this.http.get<Account>(`${SERVER_URL}/account/view/${accountid}`).pipe(
+      catchError(this.handleError<Account>('getAccountById', null))
+    );
+  }
+
+  public performTransaction(accountTransaction:AccountTransaction):Observable<Account[]> {
+    return this.currAccounts = this.http.post<AccountTransaction>(`${SERVER_URL}/account/performTransaction`, accountTransaction).pipe(
+      catchError(this.handleError<any>('performTransaction', null))
+    );
+  }
+
+  public createAccount(account:Account):Observable<any> {
+    return this.http.post<Account>(`${SERVER_URL}/account/create`, account).pipe(
+      catchError(this.handleError<any>('createAccount', null))
     );
   }
 

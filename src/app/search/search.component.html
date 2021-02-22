@@ -1,3 +1,17 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <p style="color:white">action bar</p>
+    <!--Sort by status (only available for non-users because users have no need to sort by status)-->
+    <form *ngIf="activeRole!='USER'">
+        <label for="statusSelect">Sort by status:&nbsp;</label>
+        <select name="statusSelect" id="statusSelect">
+            <option value="all" selected>Show All</option>
+            <option value="open">Open</option>
+            <option value="pending">Pending</option>
+            <option value="closed">Closed</option>
+            <option value="denied">Denied</option>
+        </select>
+    </form>
+    <!--New Account (only avaialbe for users because managers and admins shouldn't need to create accounts on manager/admin accounts)-->
+    <div *ngIf="activeRole=='USER'">
+        <button (click)="createAccount()">New Account</button>
+    </div>
 </nav>

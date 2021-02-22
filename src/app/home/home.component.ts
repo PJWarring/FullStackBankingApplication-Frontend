@@ -1,8 +1,9 @@
 import { Account } from './../models/account.model';
 import { AccountService } from './../services/account.service';
 import { Component, OnInit } from '@angular/core';
-import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { User } from '../models/user.model';
+import { NewAccountComponent } from '../new-account/new-account.component';
 
 @Component({
   selector: 'app-home',
@@ -12,48 +13,19 @@ import { User } from '../models/user.model';
 export class HomeComponent implements OnInit {
 
   accounts:Account[] = [];
-  noAccountCondition:boolean = false;
-  isManagerCondition:boolean = false;
-  isAdminCondition:boolean = false;
 
   public activeId:number = Number(sessionStorage.getItem('activeId'));
   public activeRole:string = sessionStorage.getItem('activeRole');
   public activeUsername:string = sessionStorage.getItem('activeUsername');
   public user: User = new User(this.activeId,this.activeUsername,'','','','', this.activeRole);
 
-  constructor(private accountService:AccountService, private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal) { }
 
-  ngOnInit(): void {
-    if (this.activeRole == "USER") {
-      this.getUserAccounts();
-    } else {
-      if (this.activeRole == "MANAGER") this.isManagerCondition = true;
-      else if (this.activeRole == "ADMIN") this.isAdminCondition = true;
-      this.getAdminAccounts();
-    }    
+  ngOnInit(): void {  
   }
 
-  getUserAccounts(): void {
-    this.accountService.getUserAccounts(this.user)
-    .subscribe(accounts => {
-      this.accounts = accounts;
-      this.noAccountCondition = this.checkNoAccountCondition(accounts);
-    });
+  createAccount():void {
+    const modalRef = this.modalService.open(NewAccountComponent);
+    modalRef.componentInstance.name = "newAccount";
   }
-
-  getAdminAccounts(): void {
-    this.accountService.getAdminAccounts().subscribe(accounts => {
-      this.accounts = accounts;
-      this.noAccountCondition = this.checkNoAccountCondition(accounts);
-    })
-  }
-
-  checkNoAccountCondition(accounts:Account[]):boolean {
-    if(accounts === undefined || accounts.length == 0) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
 }

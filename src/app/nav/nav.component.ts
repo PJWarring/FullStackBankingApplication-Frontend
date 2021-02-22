@@ -8,6 +8,10 @@ import { UserService } from '../services/user.service';
 })
 export class NavComponent implements OnInit {
 
+  public activeId:number = Number(sessionStorage.getItem('activeId'));
+  public activeRole:string = sessionStorage.getItem('activeRole');
+  public activeUsername:string = sessionStorage.getItem('activeUsername');
+
   constructor(private userService:UserService) { }
 
   ngOnInit(): void {

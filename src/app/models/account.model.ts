@@ -3,8 +3,9 @@ export class Account {
     balance:number;
     status:string;
     type:string;
+    ownerid:number;
 
-    constructor(id?:number, balance?:number, status?:string, type?:string) {
+    constructor(id?:number, balance?:number, status?:string, type?:string, ownerid?:number) {
         if (id) {
             this.id = id;
         } else {
@@ -25,5 +26,15 @@ export class Account {
         } else {
             this.type = "";
         }
+        if (ownerid) {
+            this.ownerid= ownerid;
+        } else {
+            this.ownerid= 0;
+        }
+    }
+
+    //This method may not be nessecary - TODO: remove this if it is not used
+    public setownerid(ownerid:number):void {
+        this.ownerid = ownerid;
     }
 }

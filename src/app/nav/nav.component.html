@@ -6,6 +6,7 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link" routerLink="/home">Home</a>
+      <a *ngIf="activeRole!='USER'" class="nav-item nav-link" routerLink="/view-profiles">View Profiles</a>
       <a class="nav-item nav-link" routerLink="/profile">Profile</a>
       <a class="nav-item nav-link" routerLink="/login" (click)=logout()>Logout</a>
     </div>

@@ -1,0 +1,10 @@
+<div class="withdrawModal">
+    <form name="withdrawForm">
+        <h1>Withdraw Form</h1>
+        <p>Account Id: {{accountid}}</p>
+        <label id="amountLabel" for="amount">Amount: $</label>
+        <input id="amount" type="number" step="0.01" [(ngModel)]="accountTransaction.amount" name="withdrawForm"/>
+        <br/>
+        <input type="submit" class="btn btn-primary" (click)="withdraw()" name="withdrawForm"/>
+    </form>
+</div>

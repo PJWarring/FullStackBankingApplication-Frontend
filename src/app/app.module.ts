@@ -12,6 +12,15 @@ import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NavComponent } from './nav/nav.component';
 import { SearchComponent } from './search/search.component';
+import { DepositComponent } from './deposit/deposit.component';
+import { WithdrawComponent } from './withdraw/withdraw.component';
+import { TransferComponent } from './transfer/transfer.component';
+import { NewAccountComponent } from './new-account/new-account.component';
+import { ViewProfilesComponent } from './view-profiles/view-profiles.component';
+import { OpenAccountsComponent } from './status-view-components/open-accounts/open-accounts.component';
+import { DisabledAccountsComponent } from './status-view-components/disabled-accounts/disabled-accounts.component';
+import { PendingAccountsComponent } from './status-view-components/pending-accounts/pending-accounts.component';
+import { AllAccountsComponent } from './status-view-components/all-accounts/all-accounts.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +30,16 @@ import { SearchComponent } from './search/search.component';
     ProfileComponent,
     SignupComponent,
     NavComponent,
-    SearchComponent
+    SearchComponent,
+    DepositComponent,
+    WithdrawComponent,
+    TransferComponent,
+    NewAccountComponent,
+    ViewProfilesComponent,
+    OpenAccountsComponent,
+    DisabledAccountsComponent,
+    PendingAccountsComponent,
+    AllAccountsComponent
   ],
   imports: [
     BrowserModule,

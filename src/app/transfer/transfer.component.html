@@ -1,0 +1,13 @@
+<div class="transferModal">
+    <form name="transferForm">
+        <h1>Transfer Form</h1>
+        <div *ngIf="clientMessage" class="alert alert-danger" role="alert">{{clientMessage.message}}</div>
+        <p>Source Account Id: {{accountid}}</p>
+        <label id="destLabel" for="destId">Destination Account Id:&nbsp;</label>
+        <input id="destId" type="number" min="1" [(ngModel)]="accountTransaction.destId" name="transferForm"/>
+        <label id="amountLabel" for="amount">Amount: $</label>
+        <input id="amount" type="number" step="0.01" [(ngModel)]="accountTransaction.amount" name="transferForm"/>
+        <br/>
+        <input type="submit" class="btn btn-primary" (click)="transfer()" name="transferForm"/>
+    </form>
+</div>

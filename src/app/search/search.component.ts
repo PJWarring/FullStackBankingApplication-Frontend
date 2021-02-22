@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { NewAccountComponent } from './../new-account/new-account.component';
+import { Component, Input, NgModule, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-search',
@@ -11,9 +13,15 @@ export class SearchComponent implements OnInit {
   public activeRole:string = sessionStorage.getItem('activeRole');
   public activeUsername:string = sessionStorage.getItem('activeUsername');
 
-  constructor() { }
+  constructor(private modalService:NgbModal) { }
 
-  ngOnInit(): void {
+  ngOnInit():void {
+
+  }
+
+  createAccount():void {
+    const modalRef = this.modalService.open(NewAccountComponent);
+    modalRef.componentInstance.name = "newAccount";
   }
 
 }
