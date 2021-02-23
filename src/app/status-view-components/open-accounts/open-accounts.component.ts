@@ -34,25 +34,12 @@ export class OpenAccountsComponent implements OnInit {
   constructor(private accountService:AccountService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    if (this.activeRole == "USER") {
-      this.getUserAccounts();
-    } else {
-      if (this.activeRole == "MANAGER") this.isManagerCondition = true;
-      else if (this.activeRole == "ADMIN") this.isAdminCondition = true;
-      this.getAdminAccounts();
-    }    
+    this.getOpenAccounts();
   }
-  
-  getUserAccounts(): void {
-    this.accountService.getUserAccounts(this.user)
+
+  getOpenAccounts(): void {
+    this.accountService.getAccountsByStatus("OPEN")
     .subscribe(accounts => {
-      this.accounts = accounts;
-      this.noAccountCondition = this.checkNoAccountCondition(accounts);
-    });
-  }
-  
-  getAdminAccounts(): void {
-    this.accountService.getAdminAccounts().subscribe(accounts => {
       this.accounts = accounts;
       this.noAccountCondition = this.checkNoAccountCondition(accounts);
     })

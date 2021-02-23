@@ -35,6 +35,12 @@ export class AccountService {
     );
   }
 
+  public getAccountsByStatus(status:string):Observable<Account[]> {
+    return this.currAccounts = this.http.get<Account[]>(`${SERVER_URL}/account/view/status/${status}`).pipe(
+      catchError(this.handleError<Account[]>('getAccountByStatus', null))
+    );
+  }
+
   public performTransaction(accountTransaction:AccountTransaction):Observable<Account[]> {
     return this.currAccounts = this.http.post<AccountTransaction>(`${SERVER_URL}/account/performTransaction`, accountTransaction).pipe(
       catchError(this.handleError<any>('performTransaction', null))
