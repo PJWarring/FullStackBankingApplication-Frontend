@@ -1,2 +1,19 @@
 <app-nav></app-nav>
-<h1>View Profiles Component</h1>
+
+<div *ngIf="clientMessage" class="alert alert-primary" role="alert">{{clientMessage.message}}</div>
+<div *ngIf="noProfilesCondition">
+    <p>There are no profiles to view.</p>
+</div>
+<div class="grid grid-pad">
+    <div *ngFor="let profile of profiles" class="col-1-4">
+        <!-- This should be handled in its own component (the view account component)-->
+        <div class="module profile">
+            <p>Profile Id: {{profile.id}}</p>
+            <p>Balance: test</p>
+            <p>Account Type: test</p>
+            <p>Account Status: test</p>
+
+            <button *ngIf="isAdminCondition" class="btn toggle-btn"><!-- TODO: add click command to button -->Edit</button>
+        </div>
+    </div>
+</div>

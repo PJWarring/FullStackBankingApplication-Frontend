@@ -53,6 +53,12 @@ export class AccountService {
     );
   }
 
+  public updateAccount(account:Account):Observable<Account> {
+    return this.currAccount = this.http.put<Account>(`${SERVER_URL}/account/update/${account.id}`, account).pipe(
+      catchError(this.handleError<Account>('updateAccount', null))
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error:any):Observable<T> => {
       console.error(error);

@@ -58,6 +58,13 @@ export class AllAccountsComponent implements OnInit {
     })
   }
 
+  updateStatus(account:Account, new_status:string):void {
+    account.status = new_status;
+    this.accountService.updateAccount(account).subscribe(new_account => {
+      account = new_account;
+    })
+  }
+
   setRefreshMessage():void {
     this.clientMessage = this.refreshPageMessage;
   }
@@ -90,5 +97,4 @@ export class AllAccountsComponent implements OnInit {
       return false;
     }
   }
-
 }

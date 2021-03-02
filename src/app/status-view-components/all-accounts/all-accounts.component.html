@@ -4,6 +4,7 @@
 </div>
 <div class="grid grid-pad">
     <div *ngFor="let account of accounts" class="col-1-4">
+        <!-- This should be handled in its own component (the view account component)-->
         <div class="module account">
             <p>Account Id: {{account.id}}</p>
             <p>Balance: {{account.balance | currency:'USD'}}</p>
@@ -14,6 +15,13 @@
                 <button *ngIf="!isManagerCondition" class="btn toggle-btn" (click)="newDeposit(account.id);">Deposit</button>
                 <button *ngIf="!isManagerCondition" class="btn toggle-btn" (click)="newWithdraw(account.id);">Withdraw</button>
                 <button *ngIf="!isManagerCondition" class="btn toggle-btn" (click)="newTransfer(account.id);">Transfer</button>
+            </div>
+            <!-- This button should update itself to either disable the button or remove them and change the status
+            display to reflect the new status -- this should be implemented when this is transfered to the view-account
+            component -->
+            <div *ngIf="account.status == 'PENDING'">
+                <button *ngIf="isManagerCondition || isAdminCondition" class="btn toggle-btn" (click)="updateStatus(account, 'OPEN')">Approve</button>
+                <button *ngIf="isManagerCondition || isAdminCondition" class="btn toggle-btn" (click)="updateStatus(account, 'DENIED')">Deny</button>
             </div>
             <div *ngIf="account.status != 'OPEN'">
                 <button *ngIf="!isManagerCondition" class="btn toggle-btn" disabled>Deposit</button>
